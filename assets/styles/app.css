@@ -1,0 +1,416 @@
+
+body {
+    background-color: #000000;
+    color: #ffffff;
+    text-align: center;
+    background-color: rgb(48, 48, 49);
+}
+
+#films_rand {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin: 3em;
+    flex-wrap: wrap;
+}
+
+#films_rand img,
+#films_rand h2 {
+    margin-left: 3em;
+    margin-right: 3em;
+}
+.country label {
+    color: #ffffff;
+}
+
+.country {
+    color: #000000;
+}
+
+form {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    color: #000000;
+}
+
+form label {
+    color: #ffffff;
+}
+
+form button {
+    color: #ffffff;
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    text-decoration: none;
+    color: #ffffff;
+    margin-bottom: 1em;
+}
+
+.pagination a {
+    margin: 1em;
+}
+
+a:link {
+    color: #ffffff;
+}
+
+a:visited {
+    color: #bac9c8;
+}
+
+a:hover {
+    color: #ecfcfd;
+}
+
+a:active {
+    color: #a4ffff;
+}
+
+a:link,
+a:visited {
+    text-decoration: none;
+}
+
+header {
+    margin: 0;
+    padding: 1em;
+    background-color: #686867;
+}
+
+.checked{
+    color: orange;
+}
+.acc{
+    margin-top: 5em;
+    margin-bottom: 5em;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    font-weight: bolder;
+    background-color: #00000094;
+}
+
+.acc h1{
+    text-shadow: 1px 1px 2px rgb(255, 255, 255), 0 0 1em rgb(1, 204, 255), 0 0 0.2em rgb(0, 255, 242);
+}
+
+.menu {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 10px;
+}
+
+.button a {
+    padding-left: 1.5em;
+    padding-right: 1.5em;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+}
+
+@media (max-width: 640px) {
+    .pagination a {
+        margin: 0.3em;
+    }
+
+    .pagination span {
+
+        max-width: min-content;
+    }
+
+
+
+    
+    /*logo
+    .menu a {}*/
+
+    /*autres boutons*/
+    div.button {
+        flex-wrap: wrap;
+    }
+
+}
+
+
+.button {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    border-style: solid;
+    justify-content: space-around;
+    width: 60%;
+}
+
+.inner-table {
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(73, 70, 78);
+    border-radius: 10px;
+    padding: 5%;
+    margin-top: 2.5em;
+}
+
+.inner-table .info {
+    display: flex;
+    flex-direction: column;
+}
+
+.inner-table .titre {
+    text-decoration: underline;
+    font-weight: bold;
+    font-size: 2em;
+    color: white;
+}
+
+.inner-table .info div {
+    margin-bottom: 10px;
+}
+
+#photo {
+    background-color: rgb(112, 107, 107);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
+}
+
+.info {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding-top: 2%;
+}
+
+#year .info:last-child {
+    padding-left: 7%;
+}
+
+#plot {
+    width: 80%;
+    margin-left: 10%;
+    display: flex;
+    align-items: center;
+}
+
+#year {
+    display: flex;
+    flex-direction: row;
+}
+
+.userInfo .bloc1 {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+
+
+
+th {
+    width: fit-content;
+    padding: 1%;
+}
+
+.table th {
+    width: fit-content;
+    min-width: 100px;
+}
+
+.episode {
+    display: flex;
+    flex-direction: row;
+}
+
+.episode a {
+    margin-left: 1em;
+}
+
+summary {
+    font-size: 2em;
+}
+
+.layout {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    margin: 5em;
+}
+
+img {
+    margin-top: 1em;
+}
+
+th{
+    width: fit-content;
+    padding: 1%;
+}
+
+
+.tableUserEntier td{
+    border:solid;
+    flex:content ;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.userImg{
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    margin: 1em;
+    background-color: #E2EBDC;
+}
+
+
+
+.tableUser,
+.userCrit {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 5em;
+    background-color: rgb(73, 70, 78);
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+    padding: 3%;
+    margin:5%;
+    width: fit-content;
+    height: fit-content;
+    
+}
+
+.userCrit{
+    background-color:rgb(110, 108, 114);
+    max-width: 50%;
+}
+
+.userInfo{
+    margin: 5%;
+    width: fit-content;
+    height: fit-content;
+
+}
+
+@media (max-width: 1200px){
+    body {
+        flex-wrap: wrap;
+    }
+    div .layout {
+        margin-left: 0em;
+
+    }
+    #films_rand img{
+        margin-left: 0;
+        margin-right: 0;
+        margin-top: 0.5em;
+        margin-bottom: 1em;
+    }
+}
+
+body{
+    overflow-x: hidden;
+}
+
+.userCrit {
+    background-color: rgb(110, 108, 114);
+    max-width: 50%;
+}
+
+.userInfo {
+    display: flex;
+    flex-direction: row;
+
+}
+
+footer,
+.deroulant{display: none;}
+
+/*on cache le retour haut de page quand y'a pas besoin de scroll   */
+@media (max-width: 1000px) and (max-height: 1000px){
+
+    header .menu .button a{
+        width:100%;
+        justify-content: center;
+    }
+    footer {
+        display: block;
+        position: sticky;
+        top:0;
+    }
+    footer a{
+        display: block;
+    }
+
+    /*menu burger*/
+    header .button{
+        display:none;
+
+    }
+
+    .deroulant{
+        display: block;
+    }
+
+    .deroulant:hover li{
+        display: block;
+    }
+    .deroulant li{
+        display: none;
+    }
+    /*fin menu burger*/
+
+    .barreRecherche{margin-left: 20%}
+
+    /*page profil*/
+    .bloc1{
+        width: 100%;
+    }
+    .userInfo{
+        flex-wrap: wrap;
+    }
+
+    .userCrit{width:150%;max-width: 0100%;}
+
+    /*page 1 série*/
+
+    #photo, .blocSerie{
+        display: flex;
+        max-width: 100%;
+        margin: 0;
+        padding: 0;
+        justify-content: center;
+        flex-direction: column;
+        flex-wrap: wrap;
+        
+    }
+
+    #photo .info,#photo .coeur,#photo .year{width:fit-content;justify-self:center;flex-wrap: wrap;flex-direction: column;margin-left: 20%;}
+
+    #photo .serieVue, #photo img{margin-left: 10%;}
+    .blocSerie{
+
+    }
+}
+
+
+footer a {
+    background-color: darkcyan;
+    border-radius: 10px;
+    max-width: fit-content;
+    padding-left: 1em;
+    padding-right: 1em;
+}
+
+@media (min-width: 1px) and (min-height: 1px) {
+    footer {
+        position: -webkit-sticky;
+        bottom: 0;
+
+    }
+}
+
