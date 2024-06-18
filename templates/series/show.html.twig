@@ -1,0 +1,323 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Séries{% endblock %}
+
+{% block stylesheet %}
+    <style>
+        body {
+            background-image: {{ path('app_series_showPoster', {'id': series.id}) }};
+        }
+    </style> 
+{% endblock %}
+
+{% block body %}
+
+{% for flashMessage in app.flashes('success') %}
+
+<div role="alert">
+    <div class="bg-green-500 text-white font-bold rounded-t px-4 py-2">
+        {{ flashMessage }}
+    </div>
+    <div class="border border-t-0 rounded-b bg-red-100 px-4 py-3">
+        <a href="{{ path('app_add_serie', {'id': series.id}) }}" class="texte noir">        
+            <button class="bg-green-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">Oui</button>
+        </a>
+        <a href="{{ path('app_series_show', {'id': series.id}) }}" class="texte noir">        
+            <button class="bg-red-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">Non</button>
+        </a>
+    </div>
+</div>
+
+{% endfor %}
+
+<<<<<<< HEAD
+{% for flashMessage in app.flashes('warning') %}
+
+<div role="alert">
+    <div class="bg-green-500 text-white font-bold rounded-t px-4 py-2">
+        {{ flashMessage }}
+    </div>
+    <div class="border border-t-0 rounded-b bg-red-100 px-4 py-3">
+        <a href="{{ path('app_addAllPreviousEpisode', {'id': app.session.get('last_episode_watched')}) }}" class="texte noir">
+            <button class="bg-green-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">Oui</button>
+        </a>
+        <a href="{{ path('app_series_show', {'id': series.id}) }}" class="texte noir">        
+            <button class="bg-red-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">Non</button>
+        </a>
+    </div>
+</div>
+
+{% endfor %}
+
+=======
+>>>>>>> adedb8baf (push before merging main into our branch)
+    <table class="table">
+    <tbody>
+        <tr class="flex flex-col lg:flex-row">
+            {#bloc de gauche#}
+            <td id="photo" class="lg:basis-2/5 lg:pt-48 p-24 ml-24 mt-10">
+                <img src='{{ path('app_series_showPoster', {'id': series.id}) }}'>
+                <div class="flex flex-row  place-content-between pt-2">
+                    <div>
+                        {% if app.user != null%}
+                            {% if app.user.series.contains(series) %}
+                                <a href="{{ path('app_remove_serie', {'id': series.id}) }}">
+                                    <img class="fit-picture" style="width: 3em; height: 3em;" src="{{ asset('img/full.png') }}" alt="Like" />
+                                </a>
+                            {% else %}
+                                <a href="{{ path('app_add_serie', {'id': series.id}) }}">
+                                    <img class="fit-picture" style="width: 3em; height: 3em;" src="{{ asset('img/emptyw.png') }}" alt="Like" />
+                                </a>
+                            {% endif %}
+                        {% endif %}
+                    </div>
+                    <div class="m-auto mt-5 mb-10 serieVue">
+                        {% if app.user != null%}
+                            {% if app.user.watchedAllSerie(series) %}
+                                <a href="{{ path('app_removeAllEpisodeOfOneSerie', {'id': series.id}) }}">
+                                    <button class="bg-green-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full">Série vue</button>
+                                </a>
+                                {% else %}
+                                    <a href="{{ path('app_addAllEpisodeOfOneSerie', {'id': series.id}) }}">
+                                        <button class="bg-red-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full">Série non vue</button>
+                                    </a>
+                                {% endif %}
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="info flex flex-row">
+                    {% for g in series.genre %}
+                        <div class="bg-black pl-2 pr-2 rounded-2xl">
+                            {{g.getName()}}
+                        </div>
+                    {% endfor %}
+                </div>
+                <div class="info">
+                    <div class="titre"><h2 class="underline text-xl">Récompenses</h2></div>
+                    <div>{{ series.awards }}</div>
+                </div>
+                <div id="year flex justify-center">
+                    <div class="info">
+                        <div class="titre"><h2 class="underline text-xl">Année de début</h2></div>
+                        <div>{{ series.yearStart }}</div>
+                    </div>
+                    <div class="info">
+                        <div class="titre"><h2 class="underline text-xl">Année de fin</h2></div>
+                        {% if series.YearEnd == null %}
+                        <div><p>?</p></div>
+                                {% else %}
+                                    <div>{{ series.YearEnd}} </div>
+                                {% endif %}
+                    </div>
+                </div>
+                <div class="info">
+                        <div class="titre"><h2>Note moyenne</h2></div>
+                        {% if averageScore != 0 %}
+                        <div>{{ (averageScore)|round(2) }}/5</div>
+                                {% else %}
+                                    <div>N/A</div>
+                                {% endif %}
+                </div>
+            </td>
+            {#bloc de droite#}
+            <td id="bloc" class="lg:basis-3/5 lg:pl-24 lg:pr-24">
+                <div class="inner-table blocSerie">
+                    <div class="info">
+                        <div class="titre"><h2>Titre</h2></div>
+                        <div>{{ series.title }}</div>
+                    </div>
+                    <div class="info" id="plot">
+                        <div class="titre"><h2>Résumé</h2></div>
+                        <div>{{ series.plot }}</div>
+                    </div>
+                    <div class="info" id="plot">
+                        <div class="titre"><h2>Casting</h2></div>
+                        {% for a in series.actor %}
+                        <div>{{ a.getName() }}
+                    </div>
+                    {% endfor %}
+                    <div class="info">
+                        <div class="titre"><h2>Lien vers IMDB</h2></div>
+<<<<<<< HEAD
+                        <a href="https://www.imdb.com/title/{{series.imdb}}">Cliquer ici pour accéder au IMDB</a>
+                        <div class="titre"><h2>Récompenses</h2></div>
+                        <div>{{ series.awards }} </div>
+=======
+                        <a href="https://www.imdb.com/title/{{series.imdb}}">Cliquez ici pour accéder à la page IMDB de la série</a>
+                        <div class="titre"><h2>Récompenses</h2></div>
+                        <div>{{ series.awards }}</div>
+                    </div>
+                    <div class="info">
+                        <div class="titre"><h2>Année de début</h2></div>
+                        <div>{{ series.yearStart }}</div>
+                    </div>
+                    <div class="info">
+                        <div class="titre"><h2>Année de fin</h2></div>
+                        <div>{{ series.YearEnd }}</div>
+>>>>>>> adedb8baf (push before merging main into our branch)
+                    </div>
+                    <div class="info">
+                        <div class="titre"><h2>année de début</h2></div>
+                        <div>{{ series.yearStart }}</div>
+                    </div>
+                    <div class="info">
+                        <div class="titre"><h2>Année de fin</h2></div>
+                        <div>{{ series.YearEnd }}</div>
+                    </div>
+                    <div class="info mb-10">
+                        <iframe width="560" height="315" src="http://www.youtube.com/embed/{{ (series.youtubeTrailer|split('/')[3])|split('=')[1] }}" frameborder="0" allowfullscreen></iframe>
+                        </iframe>
+                    </div>
+                    <div class="flex flex-wrap lg:basis-3/4 lg:pl-24 lg:pr-24 seasons">
+                        {% for s in seasons %}
+                        <details>
+                            <summary>
+                                Saison n°{{ s.getNumber() }} 
+                                    {% if app.user != null %}
+                                        {% set j=0 %}
+                                        {% for e in app.user.episode %}
+                                            {% if(s.getEpisodes.contains(e)) %}
+                                                {% set j=j+1 %}
+                                            {% endif %}
+                                        {% endfor %}
+<<<<<<< HEAD
+                                        <progress class="h-2.5 rounded-full" id="pb" max="{{ s.getEpisodes.count() }}" value="{{ j }}"></progress>
+                                        {# Si user à vu tous les episodes de s#}
+=======
+                                        <progress id="pb" max="{{ s.getEpisodes.count() }}" value="{{ j }}"></progress>
+                                        {# Si user a vu tout les episodes de s#}
+>>>>>>> adedb8baf (push before merging main into our branch)
+                                        {% if app.user.watchedAllSeason(s) %}
+                                            <a href="{{ path('app_removeAllEpisodeOfOneSeason', {'id': s.id}) }}">
+                                                <input type="checkbox" name="checkbox" checked>
+                                            </a>
+                                        {% else %}
+                                            <a href="{{ path('app_addAllEpisodeOfOneSeason', {'id': s.id}) }}">
+                                                <input type="checkbox" name="checkbox">
+                                            </a>
+                                        {% endif %}
+                                    {% endif %}
+                            </summary>
+                            <p>
+                                {% for e in s.episodes %}
+                                <div class="episode">
+                                    <li class="Episode"> Episode n°{{ e.number}} {{ e.title }} </li>
+                                    {% if app.user != null %}
+                                        {% if app.user.episode.contains(e) %}
+                                            <a href="{{ path('app_removeEpisode', {'id': e.id}) }}">
+                                                <input type="checkbox" name="checkbox" checked>
+                                            </a>
+                                        {% else %}
+                                            <a href="{{ path('app_addEpisode',  {'id': e.id}) }}">
+                                                <input type="checkbox" name="checkbox">
+                                            </a>
+                                        {% endif %}
+                                    {% endif %}
+                                </div>
+                                {% endfor %}
+                            </p>
+                        </details>
+                        {% endfor %}
+                    </div>
+                </div>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<<<<<<< HEAD
+<!--<a href="{{ path('app_series_index') }}">Retour à la liste</a>-->
+
+<div class="m-5">
+    {% if app.user %}
+        {% if existingReview is not null %}
+        Tu as déjà laissé une critique
+        {% include 'rating/_delete_form.html.twig' with {'rating': existingReview} %}
+        <div class="">
+            <ul>
+                <li>
+                    {{ existingReview.user }} - Note: {{ existingReview.value / 2}} - Il y a {{ existingReview.date | timeElapsed }}<br>
+                    <textarea class="text-white bg-black" disabled>{{ existingReview.comment }}</textarea>
+                </li>
+            </ul>
+        </div>
+        <div>
+            {{ form_start(reviewForm) }}
+            {{ form_row(reviewForm.value) }}
+            {{ form_row(reviewForm.comment) }}
+            <button class="m-2 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="submit">Editer</button>
+            {{ form_end(reviewForm) }}
+        {% else %}
+            {% include 'rating/_form.html.twig' with {'form': reviewForm} %}
+        {% endif %}
+    {% endif %}
+        
+
+<div>
+    <ul>
+        {% for i in range (0, 5) %}
+            <li>
+                <a href="{{ path('app_series_show', {'id': series.id, 'noteFilter': i}) }}">
+                (
+                {% if ((i == 0)) %}
+                    {{ i + 0.5 }}
+                {% elseif (i == 5)%}
+                    {{ i }}
+                {% else %}
+                    {{ i }}-{{i + 0.5}}
+                {% endif %}
+                )
+                {{ (noteDistribution[i]) }} reviews 
+                <progress class="h-2.5 rounded-full" id="pb" max="{{ reviews.count }}" value="{{ noteDistribution[i] }}"></progress>
+                {% if (reviews.count != 0) %}
+                {{ (noteDistribution[i] / reviews.count * 100)|round(0, 'floor')}}%</a>
+                {% else %}
+                    0%
+                {% endif %}
+            </li>²
+        {% endfor %}
+    </ul>
+</div>
+
+
+    {% if reviews is not empty %}
+        <ul>
+            {% for review in reviews %}
+                <li class=" class="flex">
+                    <div class="flex justify-center">
+                        <img class="w-20 h-20" src="{{ asset('img/userpdp.png') }}">
+                        <a class="underline text-xl mt-10 mr-5" href="{{ path('app_user_show', {'id': review.user.id}) }}">{{ review.user }}</a>
+                    </div>
+                    <p class="underline">Note: <B>{{ review.value / 2}}</B> - Il y a {{ review.date | timeElapsed }}<br></p>
+
+                    {% set rv = (review.value/2)|round %}
+                    {% for i in range(0,rv-1)%}
+                        <span class="fa fa-star checked"></span>
+                    {% endfor %}
+                    {% if rv < 5 %}
+                        {% for i in range(rv,4)%}
+                            <span class="fa fa-star"></span>
+                        {% endfor %}
+                    {%endif%}
+
+                    <p><textarea class="text-white bg-black w-80 text-center" disabled>{{ review.comment }}</textarea></p>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>Aucune revues disponibles pour {{ series.title }}.</p>
+    {% endif %}
+</div>
+</div>
+
+<div class="pagination">
+        {{ knp_pagination_render(reviews) }}
+</div>
+
+
+=======
+<a href="{{ path('app_series_index') }}">Retour à la liste</a>
+>>>>>>> adedb8baf (push before merging main into our branch)
+
+{% endblock %}
+

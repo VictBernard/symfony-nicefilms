@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Bienvenue!{% endblock %}</title>
+        <link rel="stylesheet" href="{{ asset('styles/series.css') }}">
+        <link rel="stylesheet" href="{{ asset('styles/descriptionSerie.css') }}">
+        <link rel="stylesheet" href="{{ asset('styles/app.css') }}">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/flowbite.min.js"></script>
+        <script src="https://cdn.tailwindcss.com"></script>
+        {% block stylesheets %}
+        {% endblock %}
+
+        {% block javascripts %}
+{% block importmap %}{{ importmap('app') }}{% endblock %}
+        {% endblock %}
+    </head>
+    <div id="hautPage"></div>
+
+    <header>
+    <div class="menu">
+        {% if app.request.get('_route') == 'app_home' %}
+            <a style="font-size: larger; color: white;" href={{path("app_home")}}><h1 class="flex items-center text-2xl bold font-serif underline"> NiceFilms <img style="width: 4em; height 4em;" class="m-0 p-0" src="{{ asset('img/logotest2.png')}}"></h1></a>
+        {% else %}
+    
+        <a href={{path("app_home")}}><h1 class="flex items-center text-2xl font-serif"> NiceFilms <img class="w-12 h-12 m-auto" src="{{ asset('img/logotest2.png')}}"></h1></a>
+        {% endif %}
+
+
+
+
+        <div class="button">
+    
+            {% if is_granted('IS_IMPERSONATOR') %}
+                <a href="{{ impersonation_exit_path(path('app_user_index') ) }}">Retour au compte originel</a>
+        <div class = "deroulant">
+            <h2>≡ Menu</h2>
+            <ul>
+
+            {% if is_granted('IS_IMPERSONATOR') %}
+                <li><a href="{{ impersonation_exit_path(path('app_user_index') ) }}">Retour au compte originel</a></li>
+            {% endif %}
+            {% if app.user %}
+            <li><a href="{{ path('app_user_show', {'id': app.user.id}) }}">Profil</a></li>
+            {% endif %}
+
+
+
+            {% if app.request.get('_route') == 'app_series_index' %}
+                <li><a style="font-size: larger; color: white;" href={{path("app_series_index")}}>Séries</a></li>
+            {% else %}
+                <li><a href={{path("app_series_index")}}>Séries</a></li>
+            {% endif %}
+
+            {% endif %}
+
+            {% endif %}
+
+
+            {% if app.user != null %}
+                    {% if app.request.get('_route') == 'app_liste' %}
+                    <li><a style="font-size: larger; color: white;" href={{path("app_liste")}}>Séries suivies</a></li>
+                {% else %}
+                    <li><a href="{{path("app_liste")}}">Séries suivies</a></li>
+                {% endif %}
+
+                {% endif %}
+
+            {% endif %}
+
+            
+
+                    {# Faire en sorte d'afficher ce lien seulement lorsque l'utilisateur est un admin #}
+                {% if is_granted("ROLE_ADMIN") %}
+                    {% if app.request.get('_route') == 'app_admin' %}
+                        <li><a style="font-size: largerr; color: white;" href={{ path("app_admin")}}>Admin</a></li>
+                    {% else %}
+                        <li><a href="{{ path("app_admin")}}">Admin</a></li>
+                    {% endif %}
+                {% endif %}
+
+                {% if app.user %}
+
+                    <li>[{{ app.user.name}}, {{app.user.country}}]</li>
+
+
+                    <li><a href="{{ path('app_logout') }}">Déconnexion</a></li>
+                
+                    {% else %}
+                
+                    {% if app.request.get('_route') == 'app_register' %}
+                        <li><a style="font-size: larger; color: white;" href={{ path('app_register') }}>Inscription</a></li>
+                    {% else %}
+                        <li><a href="{{ path('app_register') }}">Inscription</a></li>
+                    {% endif %}
+                
+
+                    {% if app.request.get('_route') == 'app_login' %}
+                        <li><a style="font-size: larger; color: white;" href={{ path('app_login') }}>Connexion</a></li>
+                    {% else %}
+                        <li><a href="{{ path('app_login') }}">Connexion</a></li>
+                    {% endif %}
+                
+                
+                
+
+                {% endif %}
+            </ul>
+            
+        </div>
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <div class = "deroulant">
+            <h2>≡ Menu</h2>
+            <ul>
+            {% if app.user %}
+            <li><a href="{{ path('app_user_show', {'id': app.user.id}) }}">Profil</a></li>
+            {% endif %}
+
+
+
+            {% if app.request.get('_route') == 'app_series_index' %}
+                <li><a style="font-size: larger; color: white;" href={{path("app_series_index")}}>Séries</a></li>
+            {% else %}
+                {% if app.request.get('_route') == 'app_series_index' %}
+                {% else %}
+                <li><a href={{path("app_series_index")}}>Séries</a></li>
+            {% endif %}
+
+            {% endif %}
+
+
+
+            {% if app.user != null %}
+                {% if app.request.get('_route') == 'app_liste' %}
+                    <li><a style="font-size: larger; color: white;" href={{path("app_liste")}}>Séries suivies</a></li>
+                {% else %}
+                    {% if app.request.get('_route') == 'app_liste' %}
+                    <li><a style="font-size: larger; color: white;" href={{path("app_liste")}}>Séries suivies</a></li>
+                {% else %}
+                    <li><a href="{{path("app_liste")}}">Séries suivies</a></li>
+                {% endif %}
+            {% endif %}
+
+            
+
+                    {# Faire en sorte d'afficher ce lien seulement lorsque l'utilisateur est un admin #}
+                {% if is_granted("ROLE_ADMIN") %}
+                    {% if app.request.get('_route') == 'app_admin' %}
+                        <li><a style="font-size: largerr; color: white;" href={{ path("app_admin")}}>Admin</a></li>
+                    {% else %}
+                        <li><a href="{{ path("app_admin")}}">Admin</a></li>
+                    {% endif %}
+                {% endif %}
+
+                {% if app.user %}
+
+                    <li>[{{ app.user.name}}, {{app.user.country}}]</li>
+
+
+                    <li><a href="{{ path('app_logout') }}">Déconnexion</a></li>
+                
+                    {% else %}
+                
+                    {% if app.request.get('_route') == 'app_register' %}
+                        <li><a style="font-size: larger; color: white;" href={{ path('app_register') }}>Inscription</a></li>
+                    {% else %}
+                        <li><a href="{{ path('app_register') }}">Inscription</a></li>
+                    {% endif %}
+                
+
+                    {% if app.request.get('_route') == 'app_login' %}
+                        <li><a style="font-size: larger; color: white;" href={{ path('app_login') }}>Connexion</a></li>
+                    {% else %}
+                        <li><a href="{{ path('app_login') }}">Connexion</a></li>
+                    {% endif %}
+                
+                
+                
+
+                {% endif %}
+            </ul>
+            
+        </div>
+    
+
+        <div class="button">
+            {% if app.user %}
+                {% if app.request.get('_route') == 'app_user_show' %}
+                    <a style="font-size: larger; color: white;" href="{{ path('app_user_show', {'id': app.user.id}) }}"><p class="bold text-white underline">Profil</p></a>
+                {% else %}
+                    <a href="{{ path('app_user_show', {'id': app.user.id}) }}">Profil</a>
+                {% endif %}           
+            {% endif %}
+
+
+
+            {% if app.request.get('_route') == 'app_series_index' %}
+                <a style="font-size: larger; color: white;" href={{path("app_series_index")}}>Séries</a>
+            {% else %}
+                {% if app.request.get('_route') == 'app_series_index' %}
+                <a style="font-size: larger; color: white;" href={{path("app_series_index")}}>Séries</a>
+            {% else %}
+                <a href={{path("app_series_index")}}>Séries</a>
+            {% endif %}
+
+            {% endif %}
+
+
+            {% if app.user != null %}
+                {% if app.request.get('_route') == 'app_liste' %}
+                    <a style="font-size: larger; color: white;" href={{path("app_liste")}}>Séries suivies</a>
+                {% else %}
+                    {% if app.request.get('_route') == 'app_liste' %}
+                    <a style="font-size: larger; color: white;" href={{path("app_liste")}}>Séries suivies</a>
+                {% else %}
+                    <a href="{{path("app_liste")}}">Séries suivies</a>
+                {% endif %}
+
+                {% endif %}
+
+            {% endif %}
+
+            
+
+            {# Faire en sorte d'afficher ce lien seulement lorsque l'utilisateur est un admin #}
+            {% if is_granted("ROLE_ADMIN") %}
+                {% if app.request.get('_route') == 'app_admin' %}
+                    <a style="font-size: largerr; color: white;" href={{ path("app_admin")}}><p class="bold text-white underline">Admin</p></a>
+                {% else %}
+                    <a href="{{ path("app_admin")}}">Admin</a>
+                {% endif %}
+            {% endif %}
+
+            {% if app.user %}
+
+                [{{ app.user.name}}, {{app.user.country}}]        
+
+
+                <a href="{{ path('app_logout') }}">Déconnexion</a>
+                
+                {% else %}
+                
+                {% if app.request.get('_route') == 'app_register' %}
+                    <a style="font-size: larger; color: white;" href={{ path('app_register') }}><p class="bold text-white underline">Inscription</p></a>
+                {% else %}
+                    <a href="{{ path('app_register') }}">Inscription</a>
+                {% endif %}
+                
+
+                {% if app.request.get('_route') == 'app_login' %}
+                    <a style="font-size: larger; color: white;" href={{ path('app_login') }}><p class="bold text-white underline">Connexion</p></a>
+                {% else %}
+                    <a href="{{ path('app_login') }}">Connexion</a>
+                {% endif %}             
+                    <a style="font-size: larger; color: white;" href={{ path('app_login') }}>Connexion</a>
+                {% else %}
+                    <a href="{{ path('app_login') }}">Connexion</a>
+                {% endif %}
+                
+            {% endif %}
+
+        </div>
+    
+    </div>
+    </header>
+
+    
+
+        
+
+    <body>
+        {% block body %}
+            
+        {% endblock %}
+        
+    </body>
+{% block footer %}
+    <footer class="mb-1 place-self-center">
+        <a href="#hautPage"> Retour haut page</a>
+    </footer>
+{% endblock %}
+</html>

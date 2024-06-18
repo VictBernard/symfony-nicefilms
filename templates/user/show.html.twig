@@ -1,0 +1,116 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Utilisateur{% endblock %}
+
+{% block body %}
+
+<<<<<<< HEAD
+<div class="flex flex-row">
+    <div class="basis-1/2 ml-52">
+        <img class="userImg" src="{{ asset('img/blankPfp.svg') }}" alt="Photo" />
+        <table class="tableUser">
+            <tbody>
+
+                <tr>
+                    <th>Nom</th>
+                    <td>{{ user.name }}</td>
+                </tr>
+                <tr>
+                    <th>Pays</th>
+                    <td>{{ user.country }}</td>
+                </tr>
+                <tr>
+                    <th>Email</th>
+                    <td>{{ user.email }}</td>
+                </tr>
+                <tr>
+                    <th>Date d'inscription</th>
+                    <td>{{ user.registerDate ? user.registerDate|date('Y-m-d H:i:s') : '' }}</td>
+                </tr>
+
+                <tr>
+                    <th>Séries suivies</th>
+                    <td>
+
+                    {% for s in user.series %}
+                        <div>
+                            <div>
+                                <a href="{{ path('app_series_show', {'id': s.id}) }}"><h2>{{ s.title }}</h2></a>
+                            </div>
+                        {% endfor %}
+                    </div></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="userCrit basis-1/2">
+        <p style="font-weight:bold;">Critiques</p>
+        {% for rate in ratings %}
+            <div class="critic" style="margin:5px;">
+                <div class="criticDesc">
+                    <a href="{{ path('app_series_show', {'id': rate.Series.id}) }}"> {{ rate.Series.title }} </h2></a> <!-- Titre -->
+                    - {{ rate.value /2 }}/5 <!-- Rating -->
+                </div>
+                <div class="criticContent">
+                    <textarea class="bg-transparent text-white" disabled> {{ rate.comment }}</textarea> <!-- Text -->
+                </div>
+            </div>
+        {% endfor %}
+=======
+<div class="userInfo">
+<div class="bloc1">
+    <img class="userImg" src="{{ asset('img/blankPfp.svg') }}" alt="Photo" />
+    <table class="tableUser">
+        <tbody>
+
+            <tr>
+                <th>Nom</th>
+                <td>{{ user.name }}</td>
+            </tr>
+            <tr>
+                <th>Pays</th>
+                <td>{{ user.country }}</td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td>{{ user.email }}</td>
+            </tr>
+            <tr>
+                <th>Date d'inscription</th>
+                <td>{{ user.registerDate ? user.registerDate|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+
+            <tr>
+                <th>Séries suivies</th>
+                <td>
+                {% for s in user.series %}
+                    <div>
+                        <h2>{{ s.title }}</h2>
+                            <a href="{{ path('app_series_show', {'id': s.id}) }}"></a>
+                    </div>
+                {% endfor %}
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <a href="{{ path('app_user_index') }}">Retour à la liste des utilisateurs</a>
+
+</div>
+<div class="userCrit">
+        <p style="font-weight:bold;">Critiques</p>
+        {% for rate in ratings %}
+            <div class="critic" style="margin:5px;">
+                <div class="criticDesc">
+                    <a href="{{ path('app_series_show', {'id': rate.Series.id}) }}"> <h2 style="font-weight:bold;"> {{ rate.Series.title }} </h2></a> <!-- Titre -->
+                    - {{ rate.value /2 }}/5 <!-- Rating -->
+                </div>
+                <div class="criticContent">
+                    <p> {{ rate.comment }}</p> <!-- Text -->
+                </div>
+            </div>
+        {% endfor %}
+</div>
+</div>
+
+{% endblock %}

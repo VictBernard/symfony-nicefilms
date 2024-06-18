@@ -1,0 +1,79 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des utilisateurs{% endblock %}
+
+{% block body %}
+    <h1 class="m-2 text-3xl underline">User index</h1>
+
+    <form method="get">
+        <label for="search">Search by email:</label>
+        <input type="text" id="search" name="search" value="{{ app.request.query.get('search') }}" />
+
+        <label for="itemsPerPage">Items per page:</label>
+        <select name="itemsPerPage" id="itemsPerPage" onchange="this.form.submit()">
+            {% for option in [5, 10, 20, 50] %}
+                <option value="{{ option }}" {% if pagination.getItemNumberPerPage() == option %}selected{% endif %}>
+                    {{ option }}
+                </option>
+            {% endfor %}
+        </select>
+
+        <button type="submit">Search</button>
+    </form>
+
+
+    <table class="tableUserEntier m-auto">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>Rôles</th>
+                <th>Email</th>
+                <th>Date d'inscription</th>
+                <th>Admin</th>
+                {% if (app.user.roles[0] == "ROLE_SUPER_ADMIN") %}
+                      <th>Promouvoir en tant qu'admin</th>
+                {% else %}
+                <th></th>
+                {% endif %}
+                <th>Profil</th>
+<<<<<<< HEAD
+                <th>Incarner</th>
+=======
+>>>>>>> adedb8baf (push before merging main into our branch)
+            </tr>
+        </thead>
+        <tbody>
+        {% for user in pagination %}
+            <tr>
+                <td>{{ user.id }}</td>
+                <td><a href="{{ path('app_user_show', {'id': user.id}) }}">{{ user.name }}</a></td>
+                <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
+                <td>{{ user.email }}</td>
+                <td>{{ user.registerDate ? user.registerDate|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ user.admin ? 'Yes' : 'No' }}</td>
+                {% if (app.user.roles[0] == "ROLE_SUPER_ADMIN") and (user.roles[0] == "ROLE_USER") %}
+                    <td><a href="{{ path('app_user_promote', {'id': user.id}) }}">Promouvoir</a></td>
+                {% else %}
+                    <td></td>    
+                {% endif %}
+                <td> <a href="{{ path('app_user_show', {'id': user.id}) }}">Voir fiche profil</a></td>
+<<<<<<< HEAD
+                <td> <a href="{{ path('app_home', {'_switch_user': user.email}) }}">Incarner</a></td
+=======
+>>>>>>> adedb8baf (push before merging main into our branch)
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="9">Aucune donnée trouvée</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+
+    {# Display pagination links #}
+    <div class="pagination">
+        {{ knp_pagination_render(pagination) }}
+    </div>
+{% endblock %}

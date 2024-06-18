@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Séries suivies{% endblock %}
+
+{% block body %}
+
+    <h1 class="underline text-3xl m-2">Séries suivies</h1>
+
+    <div class="pt-10 max-w-fit">
+        {% for s in series %}
+            <div class="flex flex-col lg:flex-row">
+                <div class="flex flex-col pl-10">
+                    <h2>{{ s.title }}</h2>
+                    <a href="{{ path('app_series_show', {'id': s.id}) }}"><img class="min-w-" src='{{ path('app_series_showPoster', {'id': s.id}) }}'></a>
+                </div>
+                {% else %}
+                    <h2>Vous n'avez aucune série en favori ! Pour en ajouter une, rendez vous sur la liste des séries et appuyez sur le coeur.</h2>
+                {% endfor %}
+            </div>
+    <div>
+{% endblock %}

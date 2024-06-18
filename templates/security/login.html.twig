@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Connexion{% endblock %}
+
+{% block body %}
+<form method="post">
+    {% if error %}
+        <div class="alert alert-danger text-white">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+    {% endif %}
+
+    {% if app.user %}
+        <div class="mb-3">
+            Vous êtes connecté en tant que {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Déconnexion</a>
+        </div>
+    {% endif %}
+
+<<<<<<< HEAD
+    <div class="flex text-center flex-col bg-neutral-500 p-5 rounded m-5">
+        <h1 class="h3 mb-3 font-weight-normal text-white text-2xl">Connectez-vous</h1>
+        <label class="m-2" for="inputEmail">Email</label>
+        <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
+        <label class="m-2" for="inputPassword">Mot de passe</label>
+        <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
+=======
+    <h1 class="h3 mb-3 font-weight-normal">Connectez-vous</h1>
+    <label for="inputEmail">Email</label>
+    <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
+    <label for="inputPassword">Mot de passe</label>
+    <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
+>>>>>>> adedb8baf (push before merging main into our branch)
+
+        <input type="hidden" name="_csrf_token"
+            value="{{ csrf_token('authenticate') }}"
+        >
+
+<<<<<<< HEAD
+        <button class="mt-5 bg-blue-500 hover:bg-blue-700 text-white font-bold rounded px-5 py-2" type="submit">
+            Connexion
+        </button>
+    </div>
+=======
+    <button class="btn btn-lg btn-primary" type="submit">
+        Connexion
+    </button>
+>>>>>>> adedb8baf (push before merging main into our branch)
+</form>
+{% endblock %}

@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Inscription{% endblock %}
+
+{% block body %}
+<<<<<<< HEAD
+    {% for flashMessage in app.flashes('error') %}
+=======
+    <h1>Inscription</h1>
+>>>>>>> adedb8baf (push before merging main into our branch)
+
+        <div role="alert">
+            <div class="bg-red-500 text-white font-bold rounded-t px-4 py-2">
+                {{ flashMessage }}
+            </div>
+        </div>
+
+    {% endfor %}
+
+    <div class="flex text-center flex-col bg-neutral-500 p-5 rounded w-80 m-auto mt-5">
+        <h1 class="h3 mb-3 font-weight-normal text-white text-2xl">Inscrivez-vous</h1>
+        {{ form_errors(registrationForm) }}
+
+        {{ form_start(registrationForm) }}
+            {{ form_row(registrationForm.email) }}
+            {{ form_row(registrationForm.plainPassword, {
+                label: 'Mot de Passe'
+            }) }}
+            {{ form_row(registrationForm.name, {label:'Nom'}) }}
+            <div class="country">{{ form_row(registrationForm.country, {label:'Pays'}) }}</div>
+            
+            <button type="submit" class="text-center mt-5 bg-blue-500 hover:bg-blue-700 text-white font-bold rounded px-5 py-1" type="submit">
+                S'inscrire
+            </button>
+        
+        {{ form_end(registrationForm) }}
+    </div>
+
+
+{% endblock %}

@@ -1,0 +1,9 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Promouvoir l'utilisateur{% endblock %}
+
+{% block body %}
+    <h2>Souhaitez vous rendre {{ user.email }} admin?</h2>
+    {{ include('user/_promote_form.html.twig') }}
+
+{% endblock %}

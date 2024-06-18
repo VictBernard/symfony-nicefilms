@@ -1,0 +1,177 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<<<<<<< HEAD
+
+    <form action="{{ path('app_series_index') }}">
+        <div class="flex flex-row" style="flex-wrap:wrap;">   
+            <label for="default-search" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
+            <div class="relative my-7 barreRecherche">
+                <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+                    <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
+                    </svg>
+                </div>
+                <input type="text" name="search" value="{{ app.request.query.get('search') }}" id="search" class="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Tapez...">
+                <button type="submit" class="text-white absolute end-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Chercher</button>
+            </div>
+
+            <div class="pl-10 pt-10">
+                <button id="dropdownBgHoverButton" data-dropdown-toggle="dropdownBgHover" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">Genre <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
+                </svg>
+                </button>
+
+                <div id="dropdownBgHover" class="z-10 hidden w-48 h-40 bg-white rounded-lg shadow dark:bg-gray-700 overflow-y-auto">
+                    <ul class="p-3 space-y-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownBgHoverButton">
+                        {% for g in genres %}
+                            <li>
+                                <div class="flex items-center p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
+                                    <input name="genre" id="checkbox-item-{{ g.id }}" type="checkbox" value="{{ g.id }}" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
+                                    <label for="checkbox-item-{{ g.id }}" class="w-full ms-2 text-sm font-medium text-gray-900 rounded dark:text-gray-300">{{ g.name }}</label>
+                                </div>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+
+            <div class="pl-10 pt-10">
+                <button id="dropdownBgHoverButton" data-dropdown-toggle="dropdownBgHoverYearStart" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">
+                    Année de début
+                    <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
+                    </svg>
+                </button>
+
+                <div id="dropdownBgHoverYearStart" class="z-10 hidden w-48 h-40 bg-white rounded-lg shadow dark:bg-gray-700 overflow-y-auto">
+                    <ul class="p-3 space-y-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownBgHoverButton">
+                        {% for year in startYears %}
+                            <li>
+                                <div class="flex items-center p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
+                                    <input name="anneeDebut" id="radio-item-{{ year }}" type="radio" value="{{ year }}" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
+                                    <label for="radio-item-{{ year }}" class="w-full ms-2 text-sm font-medium text-gray-900 rounded dark:text-gray-300">{{ year }} - {{year+9}}</label>
+                                </div>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+
+            <div class="pl-10 pt-10">
+                <button id="dropdownBgHoverButton" data-dropdown-toggle="dropdownBgHoverYearEnd" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">
+                    Année de fin
+                    <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
+                    </svg>
+                </button>
+
+                <div id="dropdownBgHoverYearEnd" class="z-10 hidden w-48 h-40 bg-white rounded-lg shadow dark:bg-gray-700 overflow-y-auto">
+                    <ul class="p-3 space-y-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownBgHoverButton">
+                        {% for year in endYears %}
+                            <li>
+                                <div class="flex items-center p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
+                                    <input name="anneeFin" id="radio-item-{{ year }}" type="radio" value="{{ year }}" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
+                                    <label for="radio-item-{{ year }}" class="w-full ms-2 text-sm font-medium text-gray-900 rounded dark:text-gray-300">{{ year }} - {{year+9}}</label>
+                                </div>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+
+
+            <div class="pl-10 pt-10">
+                <button id="dropdownBgHoverButtonNotes" data-dropdown-toggle="dropdownBgHoverNotes" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">
+                    Notes
+                    <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
+                    </svg>
+                </button>
+
+                <div id="dropdownBgHoverNotes" class="z-10 hidden w-48 h-40 bg-white rounded-lg shadow dark:bg-gray-700 overflow-y-auto">
+                    <ul class="p-3 space-y-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownBgHoverButton">
+                        <li>
+                            <div class="flex items-center p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
+                                <input name="notes" id="radio-item-notes-croissantes" type="radio" value="Croissant" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
+                                <label for="radio-item-notes" class="w-full ms-2 text-sm font-medium text-gray-900 rounded dark:text-gray-300">Croissant</label>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="flex items-center p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
+                                <input name="notes" id="radio-item-notes-decroissantes" type="radio" value="Decroissant" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
+                                <label for="radio-item-notes" class="w-full ms-2 text-sm font-medium text-gray-900 rounded dark:text-gray-300">Décroissant</label>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </form>
+
+
+
+    <div class="pagination">
+=======
+    <form action="{{ path('app_series_index') }}">   
+        <label for="default-search" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
+        <div class="relative">
+            <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+                <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
+                </svg>
+            </div>
+            <input type="text" name="search" value="{{ app.request.query.get('search') }}" id="search" class="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Tapez..." required>
+            <button type="submit" class="text-white absolute end-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Chercher</button>
+        </div>
+    </form>
+    <div class="pagination mt-5 max-[640]:w-3/4">
+>>>>>>> adedb8baf (push before merging main into our branch)
+        {{ knp_pagination_render(series) }}
+    </div>
+    <div class="layout max-[640]:coulmns-2">
+        
+        {% for series in series %}
+            <div class="serie max-[640]:object-scale-down">
+                <h2>{{ series.title }}</h2>
+                {% if series.averageRating != 0.00 %}
+                    <h3>{{ series.averageRating|number_format(2, '.', ',') }} </h3>
+                {% endif %}
+                <a href="{{ path('app_series_show', {'id': series.id}) }}"><img class="thumbnail" src='{{ path('app_series_showPoster', {'id': series.id}) }}'></a>
+                <div class="flex flex-row  place-content-between pt-2 max-h-48">
+                    <div class="max-[640]:object-scale-down">{#bouton <3#}
+                        {% if app.user != null%}
+                            {% if app.user.series.contains(series) %}
+                                <a href="{{ path('app_remove', {'id': series.id}) }}">
+                                    <img class="coeur" style="width: 3em; height: 3em;" src="{{ asset('img/full.png') }}" alt="Like" />
+                                </a>
+                            {% else %}
+                                <a href="{{ path('app_add', {'id': series.id}) }}">
+                                    <img class="coeur" style="width: 3em; height: 3em;" src="{{ asset('img/emptyw.png') }}" alt="Like" />
+                                </a>
+                            {% endif %}
+                        {% endif %}
+                    </div>
+                    <div class="m-auto ml-18 mt-5">{#bouton suivre#}
+                        {% if app.user != null%}
+                            {% if app.user.watchedAllSerie(series) %}
+                                <a href="{{ path('app_removeAllEpisodeOfOneSerieIndex', {'id': series.id}) }}">
+                                    <button class="bg-green-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full">Série vue</button>
+                                </a>
+                                {% else %}
+                                    <a href="{{ path('app_addAllEpisodeOfOneSerieIndex', {'id': series.id}) }}">
+                                        <button class="bg-red-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full">Série non vue</button>
+                                    </a>
+                                {% endif %}
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        {% else %}
+            <p colspan="11">Aucune donnée trouvée</p>
+        {% endfor %}
+    </div>        
+    <div class="pagination">
+        {{ knp_pagination_render(series) }}
+    </div>
+{% endblock %}

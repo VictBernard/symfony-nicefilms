@@ -1,0 +1,4 @@
+<form method="post" action="{{ path('app_user_promote_action', {'id': user.id}) }}" onsubmit="return confirm('Are you sure you want to promote this user? {{ user.name}}');">
+    <input type="hidden" name="_token" value="{{ csrf_token('promote' ~ user.id) }}">
+    <button class="btn">Promouvoir</button>
+</form>

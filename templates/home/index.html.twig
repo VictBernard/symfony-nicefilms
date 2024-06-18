@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Accueil{% endblock %}
+
+{% block body %}
+<<<<<<< HEAD
+    <body style="background-image: url('{{ asset('img/bgblack.jpg') }}');">
+        <div class="acc">
+            <img class="m-auto" src="{{ asset('img/logotest2.png')}}">
+    
+            <h3>Bienvenue sur NiceFilms ! Sur ce site, garde la trace de tes séries favorites.<br>Tu peux ajouter des séries à tes favoris, marquer des épisodes comme vus,<br>
+                Voir la fiche d'une série... Teste maintenant en cliquant sur l'une des séries ci-dessous !<br>Bonne visite !</h3>
+    
+            <div id="films_rand">
+            {% for series in series %}
+                <div class="film">
+                    <h2>{{ series.title }}</h2>
+                    <a href="{{ path('app_series_show', {'id': series.id}) }}"><img class="thumbnail" src='{{ path('app_series_showPoster', {'id': series.id}) }}'></a>
+                </div>
+            {% endfor %}
+    
+{% endblock %}
+=======
+
+<h1 class="text-white text-center text-5xl">NiceFilms<h1>
+
+
+<div class="layout">
+    <h3>Welcome to NiceFilms! Here you can keep track of all your favorite TV shows.<br>You can add shows to your watchlist, and mark episodes as watched.<br>
+        Under are 3 shows you can discover right now!<br>Have fun!</h3>
+
+    <div id="films_rand">
+    {% for series in series %}
+        <div class="film">
+            <h2>{{ series.title }}</h2>
+            <a href="{{ path('app_series_show', {'id': series.id}) }}"><img class="thumbnail" src='{{ path('app_series_showPoster', {'id': series.id}) }}'></a>
+        </div>
+    {% endfor %}
+    </div>
+</div>
+
+
+
+
+{% endblock %}
+>>>>>>> adedb8baf (push before merging main into our branch)
